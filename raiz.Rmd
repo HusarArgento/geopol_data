@@ -14,6 +14,37 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
+```{r Creacion Carpetas}
+
+proyectos <- c(
+  "proyecto-01-minerales-criticos",
+  "proyecto-02-cables-submarinos",
+  "proyecto-03-corredores-energeticos",
+  "proyecto-04-accesibilidad-urbana",
+  "proyecto-05-comercio-china-america-latina"
+)
+
+subcarpetas <- c(
+  "datos",
+  "scripts",
+  "mapas",
+  "output"
+)
+
+for (proy in proyectos){
+  dir.create(proy, showWarnings = FALSE)
+  for (sproy in subcarpetas) {
+    dir.create(file.path(proy, sproy),
+               recursive = TRUE
+               )
+  }
+}
+
+    
+    
+
+
+```
 
 
 ```{r}
