@@ -1,0 +1,138 @@
+---
+title: "ciencia de datos"
+author: "Lucas Melfi"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
+
+```
+
+**tmap — *thematic maps***
+
+Es un paquete de R diseñado específicamente para hacer **mapas temáticos** — es decir, mapas donde el color, tamaño o forma representa una variable de datos (población, comercio, riesgo geopolítico, etc.).
+
+La idea central es que sigue una lógica muy similar a ggplot2: construís el mapa **por capas**.
+
+**La lógica en código**
+
+```{r}
+library(tmap)
+library(sf)
+
+# Un mapa básico de países coloreado por PBI
+tm_shape(mundo) +           # ← "con esta geometría..."
+  tm_polygons("gdp_cap",   # ← "...pintá los polígonos según esta variable"
+              palette = "Blues",
+              title = "PBI per cápita")
+
+```
+
+```{r}
+ggplot2	Tmap
+ggplot(data)	   tm_shape(data)
+geom_bar()	     tm_polygons() / tm_dots()
+labs(title=)	   tm_layout(title=)
+theme_minimal()	tm_style("clean")
+
+```
+
+**Su ventaja clave: dos modos con un switch**
+
+```{r}
+tmap_mode("plot")    # mapa estático → para Quarto/PDF
+tmap_mode("view")    # mapa interactivo → para Shiny/HTML
+
+```
+
+El mismo código produce un mapa estático o uno interactivo con zoom y tooltips. Eso es muy útil para tu portfolio porque escribís el análisis una vez y lo publicás en ambos formatos.
+
+**Qué tipo de mapas hace**
+
+**Coropletas** — países/regiones coloreadas por una variable (el más común)
+
+**Mapas de burbujas** — puntos cuyo tamaño representa magnitud
+
+**Mapas de flujo** — conexiones entre lugares (comercio bilateral, migraciones)
+
+**Mapas en facetas** — múltiples mapas comparativos side by side
+
+**Mapas animados** — evolución temporal
+
+Para tu tema de geoeconomía, las coropletas y los mapas de flujo son los más relevantes.
+
+**Alternativas y cuándo usar cada una**
+
++-------------------+------------------------------------------------------------+
+|                   |                                                            |
++===================+============================================================+
+| **Paquete**       | **Cuándo usarlo**                                          |
++-------------------+------------------------------------------------------------+
+| tmap              | Tu opción principal para mapas temáticos analíticos        |
++-------------------+------------------------------------------------------------+
+| leaflet           | Cuando necesitás interactividad avanzada en Shiny          |
++-------------------+------------------------------------------------------------+
+| ggplot2 + geom_sf | Mapas estáticos muy personalizados para publicación        |
++-------------------+------------------------------------------------------------+
+| mapview           | Exploración rápida durante el análisis, no para publicar   |
++-------------------+------------------------------------------------------------+
+
+En resumen: tmap va a ser probablemente tu herramienta más usada para la parte espacial del portfolio. Es rápido de aprender si ya sabés ggplot2, y produce resultados muy profesionales con poco código.
+
+**Los recursos, en orden de cómo usarlos**
+
+**1. 📗 *Spatial Data Visualization with tmap* — el libro oficial**
+
+**→ [tmap.geocompx.org](https://tmap.geocompx.org/)**
+
+Es un libro gratuito y de código abierto escrito por los propios autores del paquete (Tennekes & Nowosad, 2025) que enseña a crear mapas estáticos e interactivos con tmap, cubriendo conceptos de cartografía temática, diseño y visualización espacial. Cada capítulo combina explicaciones concisas, código reproducible y ejemplos del mundo real.
+
+Es tu punto de partida principal. Muy pedagógico, nada de documentación seca.
+
+**2. 📘 *Geocomputation with R* — Capítulo 9**
+
+**→ [r.geocompx.org/adv-map](https://r.geocompx.org/adv-map)**
+
+Este capítulo cubre tmap en profundidad en lugar de muchos paquetes superficialmente, con secciones sobre mapas estáticos, animados e interactivos, y también referencia otros paquetes como leaflet, ggplot2 y mapview.
+
+Un punto extra: un practicante lo describe como preferible conocer un enfoque en detalle que tener conocimiento superficial de varios paquetes — una filosofía muy útil cuando estás construyendo un portfolio.
+
+**3. ⚠️ Ojo con el artículo de JSS (2018)**
+
+Existe un artículo publicado en el *Journal of Statistical Software* que describe tmap en detalle, pero describe la versión 1.11-2, que está desactualizada. Desde entonces se hicieron cambios mayores. No lo uses como referencia principal.
+
+**4. 🔧 Vignettes oficiales**
+
+**→ [r-tmap.github.io/tmap](https://r-tmap.github.io/tmap/)**
+
+Para consultas puntuales una vez que tenés la base. Más técnico, menos narrativo.
+
+**La ruta de aprendizaje que te recomiendo**
+
+Semana 1-2  →  tmap.geocompx.org (el libro oficial, caps. 1-5)
+
+Semana 3    →  Geocomputation with R, Cap. 9
+
+Semana 4+   →  Vignettes para funciones específicas que necesites
