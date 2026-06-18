@@ -1,0 +1,68 @@
+---
+title: "diseño_proyecto"
+author: "Lucas Melfi"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+### Pregunta
+
+- ¿Cómo se distribuye geográficamente el control de los minerales críticos necesarios para la transición energética?
+
+### Objetivo
+
+- Analizar la distribución geográfica de los minerales críticos necesarios para la transición energética y sus implicancias geoeconómicas.
+
+#### Objetivos específicos
+
+- Identificar los países que ocupan posiciones dominantes en la cadena de suministro de minerales críticos.
+
+- Analizar la distribución espacial de las reservas y la producción de minerales críticos.
+
+- Evaluar el grado de concentración geográfica de estos recursos estratégicos.
+
+### Minerales
+
+- Litio
+- Cobalto
+- Tierras raras
+
+### Productos Esperados
+
+- Mapas de reservas de minerales críticos.
+- Mapas de producción de minerales críticos.
+- Gráficos comparativos por país.
+- Mapa de las cadenas globales de suministro de minerales críticos.
+- Dashboard interactivo en Power BI.
+- Informe analítico en Quarto.
+
+#### Tabla de Indicadores
+
+| Dimensión     | Indicador                     |
+|---------------|-------------------------------|
+| Recursos      | \% de reservas                |
+| Producción    | \% producción mundial         |
+| Procesamiento | \% refinación mundial         |
+| Comercio      | \% exportaciones              |
+| Concentración | HHI o participación acumulada |
