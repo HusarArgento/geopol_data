@@ -74,14 +74,17 @@ Entonces se lee como:
 La crea en el directorio de trabajo actual.
 
 Podés verificar dónde estás parado con:
+
 ```{r}
 getwd()
 ```
+
 ¿Por qué las comillas?
 
 Porque el nombre de la carpeta es un texto (character).
 
 R interpreta:
+
 ```{r}
 "proyecto-01-minerales-criticos"
 ```
@@ -89,6 +92,7 @@ R interpreta:
 como una cadena de caracteres.
 
 Sin comillas R intentaría buscar objetos llamados:
+
 ```{r}
 proyecto
 minerales
@@ -98,6 +102,7 @@ criticos
 ¿Cómo se lee un for?
 
 La estructura general es:
+
 ```{r}
 for(variable in conjunto){
 
@@ -107,6 +112,7 @@ for(variable in conjunto){
 ```
 
 Ejemplo
+
 ```{r}
 for(i in 1:5){
 
@@ -121,14 +127,13 @@ i = 1
 
 imprime:
 
-[1] 1
+\[1\] 1
 
-Segunda vuelta
-i = 2
+Segunda vuelta i = 2
 
 imprime:
 
-[1] 2
+\[1\] 2
 
 ...
 
@@ -138,11 +143,7 @@ i = 5
 
 Resultado:
 
-[1] 1
-[1] 2
-[1] 3
-[1] 4
-[1] 5
+\[1\] 1 \[1\] 2 \[1\] 3 \[1\] 4 \[1\] 5
 
 Aplicado a tus proyectos
 
@@ -162,52 +163,42 @@ for(p in proyectos){
 
 Hace:
 
-Vuelta 1
-p = "proyecto-01"
+Vuelta 1 p = "proyecto-01"
 
 imprime:
 
-[1] "proyecto-01"
-Vuelta 2
-p = "proyecto-02"
+\[1\] "proyecto-01" Vuelta 2 p = "proyecto-02"
 
 imprime:
 
-[1] "proyecto-02"
-Vuelta 3
-p = "proyecto-03"
+\[1\] "proyecto-02" Vuelta 3 p = "proyecto-03"
 
 imprime:
 
-[1] "proyecto-03"
-
+\[1\] "proyecto-03"
 
 Entonces esta línea
+
 ```{r}
 dir.create(p)
 ```
 
 "Creá una carpeta con el nombre que tenga p en esta vuelta."
 
-rimera vuelta
-p = "proyecto-01"
+rimera vuelta p = "proyecto-01"
 
 ejecuta:
 
-dir.create("proyecto-01")
-Segunda vuelta
-p = "proyecto-02"
+dir.create("proyecto-01") Segunda vuelta p = "proyecto-02"
 
 ejecuta:
 
-dir.create("proyecto-02")
-Tercera vuelta
-p = "proyecto-03"
-
+dir.create("proyecto-02") Tercera vuelta p = "proyecto-03"
 
 Ahora viene la parte interesante: el segundo for
 
 Supongamos:
+
 ```{r}
 
 subcarpetas <- c(
@@ -217,8 +208,7 @@ subcarpetas <- c(
 )
 ```
 
-Primera vuelta del for exterior
-p = "proyecto-01"
+Primera vuelta del for exterior p = "proyecto-01"
 
 R crea:
 
@@ -226,14 +216,9 @@ proyecto-01
 
 y entra al segundo for.
 
-Primera vuelta del for interior
-s = "datos"
+Primera vuelta del for interior s = "datos"
 
-Segunda vuelta
-s = "scripts"
-Tercera vuelta
-s = "mapas"
-
+Segunda vuelta s = "scripts" Tercera vuelta s = "mapas"
 
 ¿Qué hace file.path?
 
@@ -248,9 +233,7 @@ file.path(p,s)
 
 ```
 
-Produce: 
-proyecto-01/datos
-
+Produce: proyecto-01/datos
 
 La analogía de las cajas
 
@@ -260,9 +243,7 @@ proyectos
 
 como una pila de cajas:
 
-proyecto-01
-proyecto-02
-proyecto-03
+proyecto-01 proyecto-02 proyecto-03
 
 Y:
 
@@ -270,9 +251,7 @@ subcarpetas
 
 como otra pila:
 
-datos
-scripts
-mapas
+datos scripts mapas
 
 El for exterior toma una caja:
 
@@ -280,9 +259,7 @@ proyecto-01
 
 El for interior le agrega:
 
-datos
-cripts
-mapas
+datos cripts mapas
 
 Después toma la siguiente:
 
@@ -290,18 +267,16 @@ proyecto-02
 
 Y vuelve a agregar:
 
-datos
-scripts
-mapas
+datos scripts mapas
 
 Y así sucesivamente.
-
 
 De hecho, cuando empieces con proyectos de geopolítica y análisis espacial, vas a encontrar situaciones donde un for es muy natural.
 
 Por ejemplo:
 
 Descargar datos para muchos países
+
 ```{r}
 
 for(pais in paises){
@@ -312,6 +287,7 @@ for(pais in paises){
 ```
 
 Generar mapas para muchos años
+
 ```{r}
 for(anio in 2000:2025){
 
@@ -320,8 +296,7 @@ for(anio in 2000:2025){
 }
 ```
 
-
-1. showWarnings = FALSE
+1.  showWarnings = FALSE
 
 Por defecto, R te avisa cuando algo sale raro.
 
@@ -335,11 +310,10 @@ dir.create("datos")
 
 Si la carpeta ya existe, R muestra algo parecido a:
 
-Warning:
-'datos' already exists
+Warning: 'datos' already exists
 
-No es un error. Es simplemente un aviso (warning).
-Si escribís:
+No es un error. Es simplemente un aviso (warning). Si escribís:
+
 ```{r}
 dir.create(
   "datos",
@@ -347,7 +321,7 @@ dir.create(
 )
 ```
 
-2. recursive = TRUE
+2.  recursive = TRUE
 
 Este argumento es más interesante.
 
@@ -365,8 +339,6 @@ Error
 
 o warning según el caso..
 
-
-
 ```{r}
 dir.create(
   "proyecto-01/datos",
@@ -378,11 +350,9 @@ dir.create(
 
 Entonces genera:
 
-proyecto-01
-└── datos
+proyecto-01 └── datos
 
 aunque ninguna existiera previamente.
-
 
 QUe ocurriria si tengo las carpetas proyectos de la 1 a la 7, pero no en todas van las mismas carpetas, digo adentro.
 
@@ -393,6 +363,7 @@ En R existe un objeto llamado lista (list()).
 Una lista puede contener cosas distintas dentro.
 
 Por ejemplo:
+
 ```{r}
 estructura <- list(
 
@@ -416,10 +387,13 @@ estructura <- list(
 
 )
 ```
-estructura
-│
+
+estructura │
+
 ├── proyecto-01 → datos, scripts
+
 ├── proyecto-02 → datos, scripts, mapas
+
 └── proyecto-03 → datos, scripts, mapas, output
 
 Como recorreriamos esto?
@@ -448,15 +422,11 @@ names(estructura)
 
 obtenemos:
 
-[1] "proyecto-01"
-[2] "proyecto-02"
-[3] "proyecto-03"
-
+\[1\] "proyecto-01" \[2\] "proyecto-02" \[3\] "proyecto-03"
 
 Entonces el primer for recorre los nombres de los proyectos.
 
-¿Qué es esto?
-estructura[[proy]]
+¿Qué es esto? estructura\[\[proy\]\]
 
 Supongamos:
 
@@ -464,15 +434,11 @@ proy = "proyecto-02"
 
 Entonces:
 
-estructura[[proy]]
+estructura\[\[proy\]\]
 
 equivale a:
 
-c(
-  "datos",
-  "scripts",
-  "mapas"
-)
+c( "datos", "scripts", "mapas" )
 
 Y el segundo for recorre esas subcarpetas.
 
@@ -501,18 +467,15 @@ estructura
 
 R muestra algo parecido a:
 
-$`proyecto-01`
-[1] "datos"   "scripts"
+\$`proyecto-01` \[1\] "datos" "scripts"
 
-$`proyecto-02`
-[1] "datos"   "scripts" "mapas"
+\$`proyecto-02` \[1\] "datos" "scripts" "mapas"
 
 Qué queremos recorrer en el primer for?
 
 Queremos recorrer:
 
-proyecto-01
-proyecto-02
+proyecto-01 proyecto-02
 
 Porque vamos a crear las carpetas principales.
 
@@ -526,8 +489,7 @@ names(estructura)
 
 que devuelve:
 
-[1] "proyecto-01" "proyecto-02"
-
+\[1\] "proyecto-01" "proyecto-02"
 
 Entonces:
 
@@ -535,23 +497,19 @@ for(proy in names(estructura))
 
 se convierte en:
 
-Vuelta 1
-proy <- "proyecto-01"
-Vuelta 2
-proy <- "proyecto-02"
-¿Qué pasa en el segundo for?
+Vuelta 1 proy \<- "proyecto-01" Vuelta 2 proy \<- "proyecto-02" ¿Qué pasa en el segundo for?
 
 Cuando estamos en:
 
-proy <- "proyecto-01"
+proy \<- "proyecto-01"
 
 hacemos:
 
-estructura[[proy]]
+estructura\[\[proy\]\]
 
 Esto devuelve:
 
-[1] "datos" "scripts"
+\[1\] "datos" "scripts"
 
 Fijate que eso ya es un vector.
 
@@ -559,21 +517,18 @@ No es una lista con nombres.
 
 Es directamente:
 
-c(
-  "datos",
-  "scripts"
-)
+c( "datos", "scripts" )
 
 Entonces podemos recorrerlo directamente:
 
-for(sub in estructura[[proy]])
+for(sub in estructura\[\[proy\]\])
 
 porque ya tenemos los valores que nos interesan.
-
 
 Vamos a responder tu pregunta porque es justamente la correcta.
 
 Supongamos:
+
 ```{r}
 estructura <- list(
 
@@ -610,10 +565,7 @@ R NO toma:
 
 R toma el contenido asociado a ese elemento:
 
-c(
-  "datos",
-  "scripts"
-)
+c( "datos", "scripts" )
 
 Entonces:
 
@@ -621,16 +573,13 @@ print(proy)
 
 muestra:
 
-[1] "datos"   "scripts"
-
+\[1\] "datos" "scripts"
 
 Hagamos una analogía
 
 Imaginá una agenda telefónica:
 
-Juan  -> 1111
-Ana   -> 2222
-Pedro -> 3333
+Juan -\> 1111 Ana -\> 2222 Pedro -\> 3333
 
 Si preguntás:
 
@@ -638,9 +587,7 @@ names(agenda)
 
 obtenés:
 
-Juan
-Ana
-Pedro
+Juan Ana Pedro
 
 Si recorrés:
 
@@ -648,9 +595,7 @@ for(x in agenda)
 
 btenés:
 
-1111
-2222
-3333
+1111 2222 3333
 
 Vos querés los nombres.
 
@@ -658,6 +603,4 @@ No los teléfonos.
 
 i tuviera que resumirlo en una frase:
 
-for(x in estructura) → recorre los contenidos de la lista.
-for(x in names(estructura)) → recorre los nombres de la lista.
-
+for(x in estructura) → recorre los contenidos de la lista. for(x in names(estructura)) → recorre los nombres de la lista.
