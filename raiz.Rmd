@@ -1,0 +1,70 @@
+---
+title: "Exploratorio"
+author: "Lucas"
+date: "2026-01-05"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(tidyverse)
+```
+
+```{r Creacion Carpetas}
+
+proyectos <- c(
+  "proyecto-01-minerales-criticos",
+  "proyecto-02-cables-submarinos",
+  "proyecto-03-corredores-energeticos",
+  "proyecto-04-accesibilidad-urbana",
+  "proyecto-05-comercio-china-america-latina"
+)
+
+subcarpetas <- c(
+  "datos",
+  "scripts",
+  "mapas",
+  "output"
+)
+
+for (proy in proyectos){
+  dir.create(proy, showWarnings = FALSE)
+  for (sproy in subcarpetas) {
+    dir.create(file.path(proy, sproy),
+               recursive = TRUE
+               )
+  }
+}
+
+    
+    
+
+
+```
+
+
+```{r}
+ciberseg1a <- read.csv("Datasets origin/Ciberseguridad/ITU_GCI_WIDEF.csv")
+ciberseg1b <- read.csv("Datasets origin/Ciberseguridad/ITU_GCI.csv")
+```
+
+```{r}
+names(ciberseg1b)
+
+```
+```{r}
+str(ciberseg1b)
+```
+```{r}
+table(ciberseg1b$REF_AREA_LABEL)
+
+
+ciberseg1b |> count(REF_AREA_LABEL)
+paises <- ciberseg1b|>  group_by(REF_AREA_LABEL, OBS_VALUE)
+paises2 <- ciberseg1b|>  group_by(REF_AREA_LABEL, OBS_VALUE) |> select(REF_AREA_LABEL, OBS_VALUE, OBS_STATUS_LABEL)
+```
+
